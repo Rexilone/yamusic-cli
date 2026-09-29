@@ -184,18 +184,6 @@ yamusic --no-icons            # без иконок Nerd Font
   Клиент отправляет волне события `radioStarted`, `trackStarted`, `trackFinished`, `skip`, `like`, `dislike` —
   именно по ним Яндекс подстраивает рекомендации.
 
-## Разработка
-
-```bash
-nix develop            # или: pacman -S rust mpv
-cargo run
-cargo test
-cargo test -- --ignored   # smoke-тест отрисовки (нужен mpv)
-```
-
-Публикация в AUR: обновить `pkgver` в `packaging/aur/PKGBUILD`, создать тег `vX.Y.Z`, выполнить `updpkgsums && makepkg --printsrcinfo > .SRCINFO`
-и запушить `PKGBUILD` + `.SRCINFO` в `ssh://aur@aur.archlinux.org/yamusic-cli.git`.
-
 ## Отказ от ответственности
 
 Проект не связан с ООО «Яндекс». Используется неофициальный API; он может измениться в любой момент.
