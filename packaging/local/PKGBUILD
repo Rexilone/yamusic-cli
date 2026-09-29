@@ -1,0 +1,27 @@
+# Builds and installs yamusic-cli from this local checkout:
+#   cd packaging/local && makepkg -si
+pkgname=yamusic-cli
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Terminal client for Yandex Music: My Wave, likes, stations (TUI)"
+arch=('x86_64' 'aarch64')
+url="https://github.com/rexilone/yamusic-cli"
+license=('MIT')
+depends=('mpv' 'gcc-libs' 'glibc')
+makedepends=('cargo')
+options=('!lto' '!debug')
+
+_root="$(realpath "$startdir/../..")"
+
+build() {
+  cd "$_root"
+  export RUSTUP_TOOLCHAIN=stable
+  export CARGO_TARGET_DIR="$srcdir/target"
+  cargo build --locked --release
+}
+
+package() {
+  install -Dm755 "$srcdir/target/release/yamusic" "$pkgdir/usr/bin/yamusic"
+  install -Dm644 "$_root/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -Dm644 "$_root/README.md" "$pkgdir/usr/share/doc/$pkgname/README.md"
+}

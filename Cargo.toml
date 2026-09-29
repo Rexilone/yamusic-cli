@@ -1,0 +1,34 @@
+[package]
+name = "yamusic-cli"
+version = "0.1.0"
+edition = "2021"
+description = "Terminal client for Yandex Music: My Wave, likes, stations"
+license = "MIT"
+repository = "https://github.com/rexilone/yamusic-cli"
+readme = "README.md"
+keywords = ["yandex", "music", "tui", "player", "cli"]
+categories = ["command-line-utilities", "multimedia::audio"]
+
+[[bin]]
+name = "yamusic"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1"
+base64 = "0.22"
+clap = { version = "4", features = ["derive"] }
+hmac = "0.12"
+md-5 = "0.10"
+ratatui = "0.29"
+ratatui-image = { version = "8.1", default-features = false, features = ["crossterm"] }
+image = { version = "0.25", default-features = false, features = ["jpeg", "png"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+sha2 = "0.10"
+ureq = { version = "2", features = ["json"] }
+tungstenite = { version = "0.24", default-features = false, features = ["handshake"] }
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true
